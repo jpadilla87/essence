@@ -38,5 +38,13 @@
   .cartLink {
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+  }
+
+  .cartText {
+    margin-right: 5px;
   }
   
