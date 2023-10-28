@@ -26,7 +26,7 @@
   
   .right {
     display: flex;
-    align-items: center;
+    justify-content: center;
   }
   
   .link {
@@ -45,6 +45,19 @@
   }
 
   .cartText {
+    margin-right: 5px;
+  }
+
+  .loginLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+  }
+
+  .loginText {
     margin-right: 5px;
   }
   
