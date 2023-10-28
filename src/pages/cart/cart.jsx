@@ -32,7 +32,10 @@ export const Cart = () => {
           <button> Checkout </button>
         </div>
       ) : (
-        <h2> Your Cart is Empty. </h2>
+        <div className="checkout">
+          <h2> Your Cart is Empty. </h2>
+          <button onClick={() => navigate("/shop")}> Continue Shopping </button>
+        </div>
       )}
     </div>
   );
