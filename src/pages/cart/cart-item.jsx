@@ -6,6 +6,13 @@ export const CartItem = (props) => {
   const { addToCart, removeFromCart, cartItems, updateCartItemCount } =
     useContext(ShopContext);
 
+  const handleUpdateCart = (e) => {
+    const inputValue = e.target.value;
+    if (!isNaN(inputValue) && inputValue !== "") {
+      updateCartItemCount(parseInt(inputValue), candleID);
+    }
+  };
+
   return (
     <div className="cartItem">
       <img src={candleImage} alt="Candle Shot" />
@@ -16,12 +23,7 @@ export const CartItem = (props) => {
         <p>${price}</p>
         <div className="countHandler">
           <button onClick={() => removeFromCart(candleID)}> - </button>
-          <input
-            value={cartItems[candleID]}
-            onChange={(e) =>
-              updateCartItemCount(Number(e.target.value), candleID)
-            }
-          />
+          <input value={cartItems[candleID]} onChange={handleUpdateCart} />
           <button onClick={() => addToCart(candleID)}> + </button>
         </div>
       </div>
