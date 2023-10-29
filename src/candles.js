@@ -16,6 +16,8 @@ export const CANDLES = [
     price: 15.99,
     candleImage: candle1,
     category: "Sweet",
+    supplierName: "Scentify",
+    supplierID: "SF321",
   },
   {
     candleID: 2,
@@ -23,6 +25,8 @@ export const CANDLES = [
     price: 12.99,
     candleImage: candle2,
     category: "Fruity",
+    supplierName: "Kindle",
+    supplierID: "KD889",
   },
   {
     candleID: 3,
@@ -30,6 +34,8 @@ export const CANDLES = [
     price: 16.99,
     candleImage: candle3,
     category: "Fresh",
+    supplierName: "Candle Haven",
+    supplierID: "CH158",
   },
   {
     candleID: 4,
@@ -37,6 +43,8 @@ export const CANDLES = [
     price: 11.99,
     candleImage: candle4,
     category: "Fresh",
+    supplierName: "Candle Haven",
+    supplierID: "CH158",
   },
   {
     candleID: 5,
@@ -44,6 +52,8 @@ export const CANDLES = [
     price: 16.99,
     candleImage: candle5,
     category: "Floral",
+    supplierName: "Radiant Scents",
+    supplierID: "RS845",
   },
   {
     candleID: 6,
@@ -51,6 +61,8 @@ export const CANDLES = [
     price: 13.99,
     candleImage: candle6,
     category: "Floral",
+    supplierName: "Radiant Scents",
+    supplierID: "RS845",
   },
   {
     candleID: 7,
@@ -58,6 +70,8 @@ export const CANDLES = [
     price: 11.99,
     candleImage: candle7,
     category: "Fresh",
+    supplierName: "Candle Haven",
+    supplierID: "CH158",
   },
   {
     candleID: 8,
@@ -65,6 +79,8 @@ export const CANDLES = [
     price: 13.99,
     candleImage: candle8,
     category: "Fresh",
+    supplierName: "Candle Haven",
+    supplierID: "CH158",
   },
   {
     candleID: 9,
@@ -72,6 +88,8 @@ export const CANDLES = [
     price: 12.99,
     candleImage: candle9,
     category: "Fruity",
+    supplierName: "Kindle",
+    supplierID: "KD889",
   },
   {
     candleID: 10,
@@ -79,16 +97,7 @@ export const CANDLES = [
     price: 10.99,
     candleImage: candle10,
     category: "Sweet",
+    supplierName: "Scentify",
+    supplierID: "SF321",
   },
 ];
-
-// Autumn Spice - Category: Sweet ORANGE
-// Citrus Burst - Category: Fruity YELLOW/ORANGE
-// Cozy Fireside - Category: Fresh SLATE
-// Fresh Linen - Category: Fresh LIGHT BLUE
-// Lavender Dreams - Category: Floral PURPLE
-// Midnight Rose - Category: Floral RED
-// Mountain Pine - Category: Fresh GREEN
-// Ocean Breeze - Category: Fresh BLUE
-// Tropical Paradise - Category: Fruity BLUE/GREEN
-// Vanilla Delight - Category: Sweet WHITE
