@@ -3,7 +3,7 @@ import { CANDLES } from "../../candles";
 import { Candle } from "./candle";
 import "./shop.css";
 
-export const Shop = () => {
+const Shop = () => {
   return (
     <div className="shop">
       <div className="shopTitle">
@@ -18,3 +18,5 @@ export const Shop = () => {
     </div>
   );
 };
+
+export default Shop;
