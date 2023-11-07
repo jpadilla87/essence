@@ -2,38 +2,32 @@ import React, { createContext, useState } from 'react'
 import { CANDLES } from '../candles'
 export const ShopContext = createContext(null);
 
-const getDefaultCart = () => {
-    let cart = {}
-    for (let i = 1; i < CANDLES.length +1; i++) {
-        cart[i] = 0;
-    }
-    return cart;
-};
 
 export const ShopContextProvider = (props) => {
-    const [cartItems, setCartItems] = useState(getDefaultCart());
-
-    const getTotalCartAmount = () => {
-        let totalAmount = 0;
-        for (const item in cartItems) {
-            if (cartItems[item] > 0) {
-                let itemInfo = CANDLES.find((candle) => candle.candleID === Number(item));
-                totalAmount += cartItems[item] * itemInfo.price;
-            }
-        }
-        return totalAmount;
+    const [cartItems, setCartItems] = useState({});
+    const [priceTotal, setPriceTotal] = useState(0);
+    const getCandlePrice = async (candleID) => {
+        const response = await fetch (`http://localhost:8080/candles/price?id=${candleID}`)
+        const data = await response.json();
+        return data.item[0].Price;
     };
 
-    const addToCart = (candleID) => {
-        setCartItems((prev) => ({...prev, [candleID]: prev[candleID] + 1}));
+    const addToCart = async (candleID) => {
+        const candlePrice = await getCandlePrice(candleID);
+        setCartItems({...cartItems, [candleID]: (cartItems[candleID] || 0) + 1});
+        setPriceTotal(priceTotal + candlePrice);
     }
 
-    const removeFromCart = (candleID) => {
-        setCartItems((prev) => ({...prev, [candleID]: prev[candleID] - 1}));
+    const removeFromCart = async (candleID) => {
+        const candlePrice = await getCandlePrice(candleID);
+        setCartItems({...cartItems, [candleID]: (cartItems[candleID] || 0) - 1});
+        setPriceTotal(priceTotal - candlePrice);
     }
 
-    const updateCartItemCount = (newAmount, candleID) => {
+    const updateCartItemCount = async (newAmount, candleID) => {
+        const candlePrice = await getCandlePrice(candleID);
         setCartItems((prev) => ({...prev, [candleID]: newAmount}));
+        setPriceTotal((prev) => prev + (newAmount - cartItems[candleID]) * candlePrice);
     }
 
     const contextValue = {
@@ -41,7 +35,7 @@ export const ShopContextProvider = (props) => {
         addToCart,
         removeFromCart,
         updateCartItemCount,
-        getTotalCartAmount
+        priceTotal
     }
   return <ShopContext.Provider value={contextValue}>{props.children}</ShopContext.Provider>
 };

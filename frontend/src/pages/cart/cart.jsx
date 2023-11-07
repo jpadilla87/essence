@@ -6,27 +6,27 @@ import "./cart.css";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems, getTotalCartAmount } = useContext(ShopContext);
-  const totalAmount = getTotalCartAmount();
-
+  const { cartItems, priceTotal } = useContext(ShopContext);
   const navigate = useNavigate();
+  console.log(priceTotal)
   return (
     <div className="cart">
       <div>
         <h1>Cart Items</h1>
       </div>
       <div className="cartItems">
-        {CANDLES.map((candle) => {
-          if (cartItems[candle.candleID] !== 0) {
-            return <CartItem data={candle} />;
+        {Object.keys(cartItems).map((candleID) => {
+          console.log(candleID)
+          if (cartItems[candleID] !== 0) {
+            return <CartItem id={candleID} />;
           }
         })}
       </div>
 
-      {totalAmount > 0 ? (
+      {priceTotal > 0 ? (
         <div className="checkout">
           <p>
-            Subtotal: <b>${totalAmount.toFixed(2)}</b>
+            Subtotal: <b>${priceTotal.toFixed(2)}</b>
           </p>
           <button onClick={() => navigate("/shop")}> Continue Shopping </button>
           <button> Checkout </button>
