@@ -1,13 +1,13 @@
-import candle1 from "./assets/1AutumnSpice.png";
-import candle2 from "./assets/2CitrusBurst.png";
-import candle3 from "./assets/3CozyFireside.png";
-import candle4 from "./assets/4FreshLinen.png";
-import candle5 from "./assets/5LavenderDreams.png";
-import candle6 from "./assets/6MidnightRose.png";
-import candle7 from "./assets/7MountainPine.png";
-import candle8 from "./assets/8OceanBreeze.png";
-import candle9 from "./assets/9TropicalParadise.png";
-import candle10 from "./assets/10VanillaDelight.png";
+import candle1 from "./assets/AS083.png";
+import candle2 from "./assets/CB455.png";
+import candle3 from "./assets/CF678.png";
+import candle4 from "./assets/FL889.png";
+import candle5 from "./assets/LD135.png";
+import candle6 from "./assets/MR336.png";
+import candle7 from "./assets/MP839.png";
+import candle8 from "./assets/OB000.png";
+import candle9 from "./assets/TP557.png";
+import candle10 from "./assets/VD112.png";
 
 export const CANDLES = [
   {

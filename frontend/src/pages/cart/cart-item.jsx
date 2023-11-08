@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import candleImage from "../../assets/10VanillaDelight.png";
+import candleImage from "../../assets/OB000.png";
 import { ShopContext } from "../../context/shop-context";
 import useSWR from 'swr'
 

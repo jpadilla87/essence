@@ -1,6 +1,6 @@
 // Home.js
 import React from "react";
-import candle from "./assets/candle-wallpaper.jpg";
+import candle from "./assets/CandleHome.jpg";
 import "./App.css";
 
 const Home = () => {
