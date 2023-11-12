@@ -26,7 +26,7 @@ export default function Item({ id }) {
     <div className="cartItem">
       <div className="imageContainer">
         <Image
-          src="/images/OB000.png"
+          src={`/images/${candle_id}.png`}
           alt="Candle Shot"
           width={200}
           height={200}
