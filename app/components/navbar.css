@@ -1,0 +1,63 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #828282;
+    color: white;
+  }
+  
+  .left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .candle-icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+  }
+  
+  .center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .right {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .link {
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+  }
+  
+  .cartLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+  }
+
+  .cartText {
+    margin-right: 5px;
+  }
+
+  .loginLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+  }
+
+  .loginText {
+    margin-right: 5px;
+  }
+  
