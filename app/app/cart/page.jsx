@@ -34,7 +34,13 @@ const Cart = () => {
             {" "}
             Continue Shopping{" "}
           </button>
-          <button className={styles.checkoutButton}> Checkout </button>
+          <button
+            className={styles.checkoutButton}
+            onClick={() => router.push("/checkout")}
+          >
+            {" "}
+            Checkout{" "}
+          </button>
         </div>
       ) : (
         <div>
