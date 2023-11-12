@@ -1,22 +1,22 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
+import { API_URL } from "../../utils/constants";
 import candleImage from "../../assets/OB000.png";
-import useSWR from 'swr'
-
+import useSWR from "swr";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export const Candle = ({ id }) => {
-  const { data, error, isLoading } = useSWR (
-    `http://localhost:8080/candles?id=${id}`,
+  const { data, error, isLoading } = useSWR(
+    `${API_URL}/candles?id=${id}`,
     fetcher
-  )
+  );
   // fetch individual candle based on id from backend
   const { addToCart, cartItems } = useContext(ShopContext);
 
-  if (error) return "An error has occurred!"
-  if (isLoading) return "Loading..."
-  
+  if (error) return "An error has occurred!";
+  if (isLoading) return "Loading...";
+
   const { Candle_ID, Candle_Name, Price, Scent_Category } = data.item[0];
 
   const cartItemAmount = cartItems[Candle_ID];
