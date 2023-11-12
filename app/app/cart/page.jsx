@@ -34,7 +34,7 @@ const Cart = () => {
             {" "}
             Continue Shopping{" "}
           </button>
-          <button> Checkout </button>
+          <button className={styles.checkoutButton}> Checkout </button>
         </div>
       ) : (
         <div>
