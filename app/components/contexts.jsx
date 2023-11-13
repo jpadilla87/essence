@@ -1,10 +1,14 @@
 "use client";
 import { createContext, useState } from "react";
+import { useRouter } from "next/navigation";
+
 
 export const UserContext = createContext();
 
+
 export function UserContextProvider({ children }) {
-  const [customerInfo, setCustomerInfo] = useState({});
+  const [customerInfo, setCustomerInfo] = useState(null);
+  const router = useRouter();
 
   const customerSignIn = (fname, lname, addr, mail, pass, admin) => {
     setCustomerInfo({
@@ -19,8 +23,9 @@ export function UserContextProvider({ children }) {
 
   // if JSON.stringify(customerInfo) === "{}" then you know the user hasn't signed in
   const customerSignOut = () => {
-    setCustomerInfo({});
-  };
+    setCustomerInfo(null);
+    router.push("/shop");
+  }
 
   return (
     <UserContext.Provider

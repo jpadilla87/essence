@@ -24,7 +24,7 @@ export default function Page() {
     // admin
     if (email === "admin@essence.com" && password === "PasswordA123") {
       customerSignIn("", "", "", "admin@essence.com", "PasswordA123", true);
-      router.push("/shop");
+      router.push("/dashboard");
     }
 
     // customer
