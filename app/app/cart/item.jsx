@@ -16,10 +16,9 @@ export default function Item({ id }) {
   const { candle_id, candle_name, price, scent_category } = data;
 
   const handleUpdateCart = (e) => {
-    const inputValue = e.target.value;
-    if (!isNaN(inputValue) && inputValue !== "") {
-      updateCartItemCount(parseInt(inputValue), candle_id);
-    }
+    e.target.value = Math.min(e.target.value, cartItems[candle_id].stock);
+
+    updateCartItemCount(e.target.value, candle_id);
   };
 
   return (
@@ -47,14 +46,17 @@ export default function Item({ id }) {
             -
           </button>
           <input
-            value={cartItems[candle_id]}
+            value={cartItems[candle_id].amount}
             onChange={handleUpdateCart}
             type="number"
-            min="0"
+            min={0}
+            max={cartItems[candle_id].stock}
           />
-          <button className="buttonPlus" onClick={() => addToCart(candle_id)}>
-            +
-          </button>
+          {cartItems[candle_id].amount < cartItems[candle_id].stock && (
+            <button className="buttonPlus" onClick={() => addToCart(candle_id)}>
+              +
+            </button>
+          )}
         </div>
       </div>
 

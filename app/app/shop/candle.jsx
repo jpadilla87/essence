@@ -11,10 +11,12 @@ export default function Candle({ id }) {
 
   if (error) return "An error has occurred!";
   if (isLoading) return "Loading...";
-  console.log(data);
+
   const { candle_id, candle_name, price, scent_category } = data;
 
-  const cartItemAmount = cartItems[candle_id];
+  const cartItemAmount =
+    candle_id in cartItems ? cartItems[candle_id].amount : 0;
+  console.log(cartItems);
   return (
     <div className={styles.candle}>
       <Image
@@ -31,7 +33,9 @@ export default function Candle({ id }) {
       </div>
       <button
         className={styles.cartButton}
-        onClick={() => addToCart(candle_id)}
+        onClick={() => {
+          addToCart(candle_id);
+        }}
       >
         Add to Cart {cartItemAmount > 0 && <> ({cartItemAmount})</>}
       </button>

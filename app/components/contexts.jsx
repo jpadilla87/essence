@@ -37,30 +37,76 @@ export const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [priceTotal, setPriceTotal] = useState(0);
 
-  const getCandlePrice = async (candleID) => {
+  const getCandle = async (candleID) => {
     const response = await fetch(`/api/candles?id=${candleID}`);
     const { data } = await response.json();
-    return data.price;
+    return data;
   };
 
   const addToCart = async (candleID) => {
-    const candlePrice = await getCandlePrice(candleID);
-    setCartItems({ ...cartItems, [candleID]: (cartItems[candleID] || 0) + 1 });
-    setPriceTotal(priceTotal + candlePrice);
+    const candleData = await getCandle(candleID);
+    const prevAmount = candleID in cartItems ? cartItems[candleID].amount : 0;
+
+    if (prevAmount == candleData.quantity_in_stock) return;
+
+    setCartItems({
+      ...cartItems,
+      [candleID]: {
+        amount: prevAmount + 1,
+        stock: candleData.quantity_in_stock,
+      },
+    });
+    setPriceTotal(priceTotal + candleData.price);
   };
 
   const removeFromCart = async (candleID) => {
-    const candlePrice = await getCandlePrice(candleID);
-    setCartItems({ ...cartItems, [candleID]: (cartItems[candleID] || 0) - 1 });
-    setPriceTotal(priceTotal - candlePrice);
+    const candleData = await getCandle(candleID);
+    const prevAmount = candleID in cartItems ? cartItems[candleID].amount : 0;
+
+    if (prevAmount == 0) return;
+
+    setCartItems({
+      ...cartItems,
+      [candleID]: {
+        amount: prevAmount - 1,
+        stock: candleData.quantity_in_stock,
+      },
+    });
+    setPriceTotal(priceTotal - candleData.price);
   };
 
   const updateCartItemCount = async (newAmount, candleID) => {
-    const candlePrice = await getCandlePrice(candleID);
-    setCartItems((prev) => ({ ...prev, [candleID]: newAmount }));
+    const candleData = await getCandle(candleID);
+
+    setCartItems((prev) => ({
+      ...prev,
+      [candleID]: { amount: newAmount, stock: candleData.quantity_in_stock },
+    }));
     setPriceTotal(
-      (prev) => prev + (newAmount - cartItems[candleID]) * candlePrice
+      (prev) =>
+        prev + (newAmount - cartItems[candleID].amount) * candleData.price
     );
+  };
+
+  const checkoutCart = async () => {
+    // lowering the quantity
+    for (const [id, data] of Object.entries(cartItems)) {
+      const candleData = {
+        id,
+        quantity: Math.min(data.amount, data.stock),
+      };
+      await fetch(`/api/candles/quantity`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(candleData),
+      });
+    }
+    // set cart items to {}
+    setCartItems({});
+    // set price total to 0
+    setPriceTotal(0);
   };
 
   const contextValue = {
@@ -68,6 +114,7 @@ export const ShopContextProvider = (props) => {
     addToCart,
     removeFromCart,
     updateCartItemCount,
+    checkoutCart,
     priceTotal,
   };
   return (

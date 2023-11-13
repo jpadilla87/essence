@@ -9,7 +9,7 @@ export default function Page() {
   const { data, error, isLoading } = useSWR("/api/candles", fetcher);
   if (error) return "An error has occurred!";
   if (isLoading) return "Loading...";
-  console.log(data);
+
   return (
     <div>
       <div className={styles.shopTitle}>

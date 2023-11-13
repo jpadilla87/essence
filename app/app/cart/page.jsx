@@ -16,7 +16,7 @@ const Cart = () => {
       </div>
       <div>
         {Object.keys(cartItems).map((candleID) => {
-          if (cartItems[candleID] !== 0) {
+          if (cartItems[candleID].amount !== 0) {
             return <Item id={candleID} />;
           }
         })}

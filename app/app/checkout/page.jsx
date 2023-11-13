@@ -10,7 +10,7 @@ export default function CheckoutPage() {
   const [address, setAddress] = useState("");
   const [cardInfo, setCardInfo] = useState("");
   const [error, setError] = useState("");
-  const { cartItems, priceTotal } = useContext(ShopContext);
+  const { cartItems, priceTotal, checkoutCart } = useContext(ShopContext);
   const router = useRouter();
 
   const handleFirstNameChange = (event) => {
@@ -33,7 +33,7 @@ export default function CheckoutPage() {
     setCardInfo(event.target.value);
   };
 
-  const handleCheckout = (event) => {
+  const handleCheckout = async (event) => {
     event.preventDefault();
 
     // Validate input fields
@@ -43,6 +43,7 @@ export default function CheckoutPage() {
     }
 
     // implement logic for checkout
+    await checkoutCart();
 
     // Redirect to a confirmation page after successful checkout
     router.push("/confirmation");
@@ -117,7 +118,7 @@ export default function CheckoutPage() {
           <ul>
             {Object.keys(cartItems).map((candleID) => (
               <li key={candleID}>
-                {`Item: ${candleID}, Quantity: ${cartItems[candleID]}`}
+                {`Item: ${candleID}, Quantity: ${cartItems[candleID].amount}`}
               </li>
             ))}
           </ul>
