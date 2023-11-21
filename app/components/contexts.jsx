@@ -2,34 +2,68 @@
 import { createContext, useState } from "react";
 import { useRouter } from "next/navigation";
 
-
 export const UserContext = createContext();
 
-
 export function UserContextProvider({ children }) {
-  const [customerInfo, setCustomerInfo] = useState(null);
+  const [UserInfo, setUserInfo] = useState(null);
   const router = useRouter();
 
-  const customerSignIn = (fname, lname, addr, mail, pass, admin) => {
-    setCustomerInfo({
-      firstName: fname,
-      lastName: lname,
-      adress: addr,
-      email: mail,
-      password: pass,
-      isAdmin: admin,
-    });
+  const UserSignIn = async (loginInfo) => {
+    const response = await fetch(`/api/auth/login`,  {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginInfo),
+    })
+    
+    const userInfo = await response.json();
+
+    if (userInfo.found) {
+      setUserInfo(userInfo.data)
+
+      if (userInfo.isAdmin) {
+        router.push("/dashboard");
+      }
+      else {
+        router.push("/shop");
+      }
+    }
+
+    return userInfo.found;
   };
 
-  // if JSON.stringify(customerInfo) === "{}" then you know the user hasn't signed in
-  const customerSignOut = () => {
-    setCustomerInfo(null);
+  // if JSON.stringify(UserInfo) === "{}" then you know the user hasn't signed in
+  const UserSignOut = () => {
+    setUserInfo(null);
     router.push("/shop");
   }
 
+  const UserRegister = async (newUser) => {
+    const response = await fetch(`/api/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newUser),
+    });
+    const { created } = await response.json();
+
+    if (created) {
+      setUserInfo(newUser)
+      router.push("/shop");
+    }
+
+    return created
+  }
+
+  const contextValue = {
+    UserInfo, setUserInfo, UserSignIn, UserSignOut, UserRegister
+  };
+
   return (
     <UserContext.Provider
-      value={{ customerInfo, setCustomerInfo, customerSignIn, customerSignOut }}
+      value={contextValue}
     >
       {children}
     </UserContext.Provider>

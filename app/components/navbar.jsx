@@ -6,7 +6,7 @@ import { UserContext } from "./contexts";
 import "./navbar.css";
 
 export default function Navbar() {
-  const { customerInfo, customerSignOut } = useContext(UserContext);
+  const { UserInfo, UserSignOut } = useContext(UserContext);
 
   return (
     <div className="navbar">
@@ -22,24 +22,20 @@ export default function Navbar() {
         <Link href="/shop" className="link">
           Shop
         </Link>
+        <Link href="/cart" className="link">
+            Cart
+          </Link>
       </div>
       <div className="right">
         <div className="link">
-          <Link href="/cart" className="cartLink">
-            <span className="cartText">Cart</span>
-            <ShoppingCart size={32} color="white" />
-          </Link>
-        </div>
-
-        <div className="link">
-          { customerInfo == null ?
+          { UserInfo == null ?
           <Link href="/login" className="loginLink">
             <span className="loginText">Login</span>
             <User size={32} color="white" />
           </Link>
-          : <button onClick={() => customerSignOut()} className="loginLink">
-              <span className="loginText">Logout</span>
-              <User size={32} color="white" />
+          : <button onClick={() => UserSignOut()} className="loginLink">
+              <span className="logoutText">Logout</span>
+              <User size={32} color="slategray" />
             </button>
           }
         </div>

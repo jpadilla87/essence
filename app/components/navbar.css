@@ -60,4 +60,8 @@
   .loginText {
     margin-right: 5px;
   }
+
+  .logoutText {
+    color: slategray;
+  }
   

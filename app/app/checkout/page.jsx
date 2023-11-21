@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { ShopContext } from "components/contexts";
 
 export default function CheckoutPage() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [cardInfo, setCardInfo] = useState("");
   const [error, setError] = useState("");
@@ -53,7 +53,7 @@ export default function CheckoutPage() {
     <div style={styles.container}>
       <h1 style={styles.heading}>Checkout</h1>
       <form style={styles.form} onSubmit={handleCheckout}>
-        <div style={styles.formGroup}>
+        {/* <div style={styles.formGroup}>
           <label htmlFor="firstName" style={styles.label}>
             First Name:
           </label>
@@ -64,8 +64,8 @@ export default function CheckoutPage() {
             onChange={handleFirstNameChange}
             style={styles.input}
           />
-        </div>
-        <div style={styles.formGroup}>
+        </div> */}
+        {/* <div style={styles.formGroup}>
           <label htmlFor="lastName" style={styles.label}>
             Last Name:
           </label>
@@ -76,8 +76,8 @@ export default function CheckoutPage() {
             onChange={handleLastNameChange}
             style={styles.input}
           />
-        </div>
-        <div style={styles.formGroup}>
+        </div> */}
+        {/* <div style={styles.formGroup}>
           <label htmlFor="email" style={styles.label}>
             Email:
           </label>
@@ -88,7 +88,7 @@ export default function CheckoutPage() {
             onChange={handleEmailChange}
             style={styles.input}
           />
-        </div>
+        </div> */}
         <div style={styles.formGroup}>
           <label htmlFor="address" style={styles.label}>
             Address:

@@ -7,7 +7,7 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { customerSignIn } = useContext(UserContext);
+  const { UserSignIn } = useContext(UserContext);
   const router = useRouter();
 
   const handleEmailChange = (event) => {
@@ -18,21 +18,18 @@ export default function Page() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // admin
-    if (email === "admin@essence.com" && password === "PasswordA123") {
-      customerSignIn("", "", "", "admin@essence.com", "PasswordA123", true);
-      router.push("/dashboard");
-    }
+    const found = await UserSignIn({
+      email,
+      password
+    })
 
-    // customer
-    else if (email === "johnsmith@gmail.com" && password === "Password1") {
-      customerSignIn("", "", "", "johnsmith@gmail.com", "Password1", false);
-      router.push("/shop");
+    if (found) {
+      setError('')
     } else {
-      setError("Incorrect email or password. Please try again.");
+      setError('Invalid username and/or password. Please try again.')
     }
   };
 
@@ -69,6 +66,9 @@ export default function Page() {
         </button>
       </form>
       {error && <p style={styles.error}>{error}</p>}
+      <div>
+        Register for an account <a href="/register">here</a>.
+      </div>
     </div>
   );
 }
@@ -107,9 +107,10 @@ const styles = {
     padding: "0.5rem",
     fontSize: "1rem",
     cursor: "pointer",
-    width: "19em",
+    width: "107%"
   },
   error: {
     color: "red",
+    marginTop: "10px",
   },
 };
