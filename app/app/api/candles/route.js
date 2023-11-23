@@ -13,3 +13,11 @@ export async function GET(request) {
 
   return Response.json({ data: rows });
 }
+
+export async function POST(request) {
+  const { id, name, price, quantity, scentCategory } = await request.json();
+
+  await sql`UPDATE candle SET Candle_name = ${name}, Price = ${price}, Quantity_in_stock = ${quantity}, Scent_category = ${scentCategory} WHERE Candle_id = ${id};`;
+  
+  return Response.json({ message: "Success." });
+}
