@@ -3,6 +3,7 @@ import React from "react";
 import useSWR from "swr";
 import Candle from "./candle";
 import { fetcher } from "/helpers/api";
+import styles from "./styles.module.css";
 
 export default function Page() {
   const { data, error, isLoading } = useSWR("/api/candles", fetcher);
