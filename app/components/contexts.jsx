@@ -9,23 +9,22 @@ export function UserContextProvider({ children }) {
   const router = useRouter();
 
   const UserSignIn = async (loginInfo) => {
-    const response = await fetch(`/api/auth/login`,  {
+    const response = await fetch(`/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(loginInfo),
-    })
-    
+    });
+
     const userInfo = await response.json();
 
     if (userInfo.found) {
-      setUserInfo(userInfo.data)
+      setUserInfo(userInfo.data);
 
       if (userInfo.isAdmin) {
         router.push("/dashboard");
-      }
-      else {
+      } else {
         router.push("/shop");
       }
     }
@@ -37,7 +36,7 @@ export function UserContextProvider({ children }) {
   const UserSignOut = () => {
     setUserInfo(null);
     router.push("/shop");
-  }
+  };
 
   const UserRegister = async (newUser) => {
     const response = await fetch(`/api/auth/register`, {
@@ -50,23 +49,23 @@ export function UserContextProvider({ children }) {
     const { created } = await response.json();
 
     if (created) {
-      setUserInfo(newUser)
+      setUserInfo(newUser);
       router.push("/shop");
     }
 
-    return created
-  }
+    return created;
+  };
 
   const contextValue = {
-    UserInfo, setUserInfo, UserSignIn, UserSignOut, UserRegister
+    UserInfo,
+    setUserInfo,
+    UserSignIn,
+    UserSignOut,
+    UserRegister,
   };
 
   return (
-    <UserContext.Provider
-      value={contextValue}
-    >
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
 }
 
@@ -128,6 +127,7 @@ export const ShopContextProvider = (props) => {
   };
 
   const checkoutCart = async () => {
+    console.log("checkoutCart");
     // lowering the quantity
     for (const [id, data] of Object.entries(cartItems)) {
       const candleData = {

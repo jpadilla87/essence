@@ -1,29 +1,16 @@
 "use client";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ShopContext } from "components/contexts";
 
 export default function CheckoutPage() {
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [cardInfo, setCardInfo] = useState("");
   const [error, setError] = useState("");
   const { cartItems, priceTotal, checkoutCart } = useContext(ShopContext);
+  const [redirectToConfirmation, setRedirectToConfirmation] = useState(false);
+
   const router = useRouter();
-
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
 
   const handleAddressChange = (event) => {
     setAddress(event.target.value);
@@ -33,11 +20,17 @@ export default function CheckoutPage() {
     setCardInfo(event.target.value);
   };
 
+  useEffect(() => {
+    if (redirectToConfirmation) {
+      router.push("/confirmation");
+    }
+  }, [redirectToConfirmation]);
+
   const handleCheckout = async (event) => {
     event.preventDefault();
 
     // Validate input fields
-    if (!firstName || !lastName || !email || !address || !cardInfo) {
+    if (!address || !cardInfo) {
       setError("Please fill out all fields.");
       return;
     }
@@ -46,49 +39,13 @@ export default function CheckoutPage() {
     await checkoutCart();
 
     // Redirect to a confirmation page after successful checkout
-    router.push("/confirmation");
+    setRedirectToConfirmation(true);
   };
 
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Checkout</h1>
       <form style={styles.form} onSubmit={handleCheckout}>
-        {/* <div style={styles.formGroup}>
-          <label htmlFor="firstName" style={styles.label}>
-            First Name:
-          </label>
-          <input
-            type="text"
-            id="firstName"
-            value={firstName}
-            onChange={handleFirstNameChange}
-            style={styles.input}
-          />
-        </div> */}
-        {/* <div style={styles.formGroup}>
-          <label htmlFor="lastName" style={styles.label}>
-            Last Name:
-          </label>
-          <input
-            type="text"
-            id="lastName"
-            value={lastName}
-            onChange={handleLastNameChange}
-            style={styles.input}
-          />
-        </div> */}
-        {/* <div style={styles.formGroup}>
-          <label htmlFor="email" style={styles.label}>
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
-            style={styles.input}
-          />
-        </div> */}
         <div style={styles.formGroup}>
           <label htmlFor="address" style={styles.label}>
             Address:
