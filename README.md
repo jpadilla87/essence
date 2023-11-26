@@ -87,7 +87,7 @@ POSTGRES_DATABASE="verceldb"
     1. Although uncomplete, when a person tries to add candles into their cart, they are unable to purchase more than the quantity available. I.E. Buying 21 candles, where there is only 20 in stock. The number input stops and doesn't allow any higher number.
        
 4. Types of queries/reports availiable
-    - Tickets Report - Displays Order Information
+    - Orders, shows recent orders from customers
 
 ## Technologies 📡
 
