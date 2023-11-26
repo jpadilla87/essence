@@ -1,0 +1,37 @@
+.ordertable{
+    height: 550px;
+    padding: 20px;
+    align-items: center;
+
+
+    .ordertableTitle{
+        width: 100%;
+        font-size: 24px;
+        color: rgb(78, 8, 82);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .datagrid{
+        color: #616161;
+        border: none;
+    }
+
+    .cellAction{
+        align-items: center;
+        display: flex;
+        gap: 15px;
+
+        .deleteButton{
+            padding: 2px 5px;
+            border-radius: 5px;
+            color: crimson;
+            border: 1px dotted rgba(220,20,60,0.6);
+            cursor: pointer;
+        }
+    }
+
+
+}

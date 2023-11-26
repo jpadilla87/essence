@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Styles from './styles.module.css';
-import ProductModal from './productModal';
-import { fetcher } from 'helpers/api';
-import useSWR from 'swr';
+import React, { useState } from "react";
+import Image from "next/image";
+import Styles from "./styles.module.css";
+import ProductModal from "./productModal";
+import { fetcher } from "helpers/api";
+import useSWR from "swr";
 
 const ProductCard = ({ id }) => {
   const { data, error, isLoading } = useSWR(`/api/candles?id=${id}`, fetcher);
@@ -18,14 +18,36 @@ const ProductCard = ({ id }) => {
     setIsModalOpen(false);
   };
 
-  if (error) return 'An error has occurred!';
-  if (isLoading) return 'Loading...';
+  if (error) return "An error has occurred!";
+  if (isLoading) return "Loading...";
 
-  const { candle_id, candle_name, quantity_in_stock, price, scent_category } = data;
+  const { candle_id, candle_name, quantity_in_stock, price, scent_category } =
+    data;
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    const deleteBody = {
+      id,
+    };
+
+    await fetch(`/api/candles`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(deleteBody),
+    });
+  };
 
   return (
     <div>
-      <Image src={`/images/${candle_id}.png`} alt="Candle Shot" width={150} height={150} />
+      <Image
+        src={`/images/${candle_id}.png`}
+        alt="Candle Shot"
+        width={150}
+        height={150}
+      />
       <p>
         <b>{candle_name}</b>
       </p>
@@ -33,7 +55,9 @@ const ProductCard = ({ id }) => {
         <button className={Styles.editButton} onClick={openModal}>
           Edit
         </button>
-        <button className={Styles.deleteButton}>Delete</button>
+        <button className={Styles.deleteButton} onClick={handleDelete}>
+          Delete
+        </button>
       </div>
 
       {isModalOpen && (
