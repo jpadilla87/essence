@@ -2,7 +2,7 @@
 An Online Candle Store made using React.
 
 # Links
-Hosted Site: <[http://ec2-18-119-116-174.us-east-2.compute.amazonaws.com/](https://essence-true.vercel.app/)>  
+Hosted Site: <[Essence Candle Shop](https://essence-true.vercel.app/)>  
 
 ## Installation/Startup guide 🔨
 
