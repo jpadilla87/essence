@@ -20,7 +20,10 @@ export function UserContextProvider({ children }) {
     const userInfo = await response.json();
 
     if (userInfo.found) {
-      setUserInfo(userInfo.data);
+      setUserInfo({
+        ...userInfo.data,
+        isAdmin: userInfo.isAdmin
+      });
 
       if (userInfo.isAdmin) {
         router.push("/dashboard");

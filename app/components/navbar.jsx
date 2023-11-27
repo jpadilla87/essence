@@ -23,21 +23,27 @@ export default function Navbar() {
           Shop
         </Link>
         <Link href="/cart" className="link">
-            Cart
+          Cart
+        </Link>
+        {UserInfo && UserInfo.isAdmin && (
+          <Link href="/dashboard" className="link">
+            Dashboard
           </Link>
+        )}
       </div>
       <div className="right">
         <div className="link">
-          { UserInfo == null ?
-          <Link href="/login" className="loginLink">
-            <span className="loginText">Login</span>
-            <User size={32} color="white" />
-          </Link>
-          : <button onClick={() => UserSignOut()} className="loginLink">
+          {UserInfo == null ? (
+            <Link href="/login" className="loginLink">
+              <span className="loginText">Login</span>
+              <User size={32} color="white" />
+            </Link>
+          ) : (
+            <button onClick={() => UserSignOut()} className="loginLink">
               <span className="logoutText">Logout</span>
               <User size={32} color="slategray" />
             </button>
-          }
+          )}
         </div>
       </div>
     </div>
