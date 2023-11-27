@@ -22,8 +22,8 @@ export default function Candle({ id }) {
       <Image
         src={`/images/${candle_id}.png`}
         alt="Candle Shot"
-        width={400}
-        height={400}
+        width={200}
+        height={200}
       />
       <div className={styles.candleDescription}>
         <p>

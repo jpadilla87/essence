@@ -97,7 +97,7 @@ const ProductModal = ({ product, isOpen, onClose, onUpdateProduct }) => {
           </div>
           <div className="field is-grouped">
             <div className="control">
-              <button type="submit" className="button is-primary">
+              <button type="submit" className="button is-primary" onClick={() => alert("Candle is edited")}>
                 Save
               </button>
             </div>

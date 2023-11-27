@@ -4,7 +4,7 @@
     font-size: 40px;
   }
   .candles {
-    width: 100%;
+    width: 60%;
     height: auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -13,9 +13,9 @@
   
   .candle {
     border-radius: 15px;
-    width: 300px;
-    height: 350px;
-    margin: 100px;
+    max-width: 300px;
+    max-height: 350px;
+    margin: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
